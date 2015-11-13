@@ -13,8 +13,8 @@ For Building on Debian platform from command line please follow below instructio
 4. Run this command  javac -cp lib/*; uk/co/level7systems/ConvertMp3ToText.java
 
 
-#Below command will run the compiled code
-5. Run this command now java -cp lib/*; uk/co/level7systems/ConvertMp3ToText
+#Below command will run the compiled code  You have to pass the File path as argument
+5. Run this command now java -cp lib/*; uk/co/level7systems/ConvertMp3ToText \home\kundan\MP3\OSR_us_000_0015_8k.mp3
 
 
 Note- a. Make sure that java is added in your class path before you execute the above command. For More about adding java to class path please check on internet.
@@ -23,15 +23,6 @@ Note- a. Make sure that java is added in your class path before you execute the 
 	  
 	  
 #Usages
+ java -cp lib/*; uk/co/level7systems/ConvertMp3ToText \home\kundan\MP3\OSR_us_000_0015_8k.mp3
  
- 1. Once you run the code It will prompt you for the mp3 file path which you want to analyse, below is details .
- 
-    Enter the fully qualified path of the Mp3 file
-    # Type the path of the file here  eg. \home\kundan\MP3\OSR_us_000_0015_8k.mp3
-	
-	# Once you enter the file path and press enter it will show you some debug info and recognised text from that mp3 file .
-	
-	
-# You can also build this project from Net-beans IDE easily and run it , You just need to open this project in Netbeans IDE and Click on Clean Build,
-# After the click on run it will automatically compile it and run the code
 

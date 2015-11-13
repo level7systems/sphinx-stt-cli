@@ -3,12 +3,9 @@ package uk.co.level7systems;
 import edu.cmu.sphinx.api.Configuration;
 import edu.cmu.sphinx.api.SpeechResult;
 import edu.cmu.sphinx.api.StreamSpeechRecognizer;
-import edu.cmu.sphinx.decoder.adaptation.Stats;
-import edu.cmu.sphinx.decoder.adaptation.Transform;
 import edu.cmu.sphinx.result.WordResult;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.Scanner;
 import javazoom.jl.converter.Converter;
 
 /**
@@ -19,14 +16,11 @@ public class ConvertMp3ToText {
     
     
     
-    public static void recogniseText(){
+    public static void recogniseText(String filePath){
          String wavfile=null;
         try{
             
-            Scanner sc=new Scanner(System.in);
-            
-            System.out.println("Enter the fully qulified path of the Mp3 file");
-            String filePath=sc.nextLine();
+           
             if(filePath.endsWith(".mp3"))
            wavfile=filePath.replace(".mp3",".wav");
             else if(filePath.endsWith(".Mp3"))
@@ -83,7 +77,11 @@ public class ConvertMp3ToText {
     }
 
      public static void main(String[] args) throws Exception {
-         recogniseText();
+         
+         if(args==null || args.length==0){
+             System.out.println("No argument received, Please provide the File Path as argument");
+         }
+         recogniseText(args[0]);
      }
         
     
