@@ -1,4 +1,4 @@
-package com.mycompany.mp3totext;
+package uk.co.level7systems;
 
 import edu.cmu.sphinx.api.Configuration;
 import edu.cmu.sphinx.api.SpeechResult;
