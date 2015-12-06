@@ -4,8 +4,13 @@ import edu.cmu.sphinx.api.Configuration;
 import edu.cmu.sphinx.api.SpeechResult;
 import edu.cmu.sphinx.api.StreamSpeechRecognizer;
 import edu.cmu.sphinx.result.WordResult;
+import edu.cmu.sphinx.util.props.ConfigurationManager;
+import edu.cmu.sphinx.util.props.ConfigurationManagerUtils;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 import javazoom.jl.converter.Converter;
 
 /**
@@ -28,11 +33,10 @@ public class ConvertMp3ToText {
              
              Converter myConverter = new Converter();
                     myConverter.convert(filePath,wavfile);
-        
-    System.out.println("Loading models... "+wavfile);
 
         Configuration configuration = new Configuration();
-
+      
+      
         // Load model from the jar
         configuration
                 .setAcousticModelPath("resource:/edu/cmu/sphinx/models/en-us/en-us");
@@ -47,6 +51,9 @@ public class ConvertMp3ToText {
 
         StreamSpeechRecognizer recognizer = new StreamSpeechRecognizer(
                 configuration);
+        
+         
+       
         InputStream stream = new FileInputStream(wavfile);
         stream.skip(44);
 
@@ -54,17 +61,13 @@ public class ConvertMp3ToText {
         recognizer.startRecognition(stream);
         SpeechResult result;
         while ((result = recognizer.getResult()) != null) {
-
-            System.out.format("Hypothesis: %s\n", result.getHypothesis());
-
-            System.out.println("List of recognized words and their times:");
             for (WordResult r : result.getWords()) {
-                System.out.println(r);
+                System.out.println(r.getWord());
             }
 
-            System.out.println("Best 3 hypothesis:");
-            for (String s : result.getNbest(3))
-                System.out.println(s);
+//            System.out.println("Best 3 hypothesis:");
+//            for (String s : result.getNbest(3))
+//                System.out.println(s);
 
         }
         recognizer.stopRecognition();
@@ -77,7 +80,9 @@ public class ConvertMp3ToText {
     }
 
      public static void main(String[] args) throws Exception {
-         
+         LogManager manager = LogManager.getLogManager();
+       manager.readConfiguration(Thread.currentThread().getContextClassLoader().getResourceAsStream("logging.properties"));
+        
          if(args==null || args.length==0){
              System.out.println("No argument received, Please provide the File Path as argument");
          }
